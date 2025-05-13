@@ -1,4 +1,4 @@
-# ToolHive - making MCP servers easy and secure <!-- omit in toc -->
+# ToolHive with Web GUI - making MCP servers easy and secure <!-- omit in toc -->
 
 [![Release](https://img.shields.io/github/v/release/stacklok/toolhive?style=flat&label=Latest%20version)](https://github.com/stacklok/toolhive/releases)
 |
@@ -20,6 +20,10 @@ consistency, and security.
 
 ## Contents <!-- omit in toc -->
 
+- [Web GUI](#web-gui)
+  - [Running the Web GUI](#running-the-web-gui)
+    - [Using Docker](#using-docker)
+    - [Using the Binary](#using-the-binary)
 - [Why ToolHive?](#why-toolhive)
   - [Key benefits](#key-benefits)
 - [Getting started](#getting-started)
@@ -38,6 +42,7 @@ consistency, and security.
 - [Advanced usage](#advanced-usage)
   - [Customize permissions](#customize-permissions)
   - [Run ToolHive in Kubernetes](#run-toolhive-in-kubernetes)
+  - [Environment Variables](#environment-variables)
 - [Contributing to ToolHive](#contributing-to-toolhive)
 - [License](#license)
 
@@ -298,6 +303,7 @@ ToolHive offers integration with multiple secret providers:
 - `1password`
 
 #### `encrypted`
+
 This example enables ToolHive's encrypted secrets store, creates a secret for a
 GitHub authentication token, and runs the GitHub MCP server with the token:
 
@@ -317,6 +323,7 @@ For more details on managing secrets, see the
 `thv secret --help`.
 
 #### `1password`
+
 This example enables ToolHive's 1Password integration for retrieving secrets.
 
 To enable the `1password` provider:
@@ -341,7 +348,6 @@ Secret op://test/login/password: my-test-passywordy
 For more details on managing secrets, see the
 [`thv secret` command reference](./docs/cli/thv_secret.md) or run
 `thv secret --help`.
-
 
 ### Run a custom MCP server
 
@@ -468,6 +474,54 @@ Check out the
 guide to get started.
 
 [Deploy MCP Servers in Kubernetes with ToolHive Operator](./docs/kind/deploying-mcp-server-with-operator.md)
+
+## Web GUI
+
+<img width="1505" alt="Image" src="https://github.com/user-attachments/assets/b8553a01-0057-4c6c-b963-67afdcd21c05" />
+
+ToolHive now includes a web-based graphical user interface that makes it even easier to manage your MCP servers. The GUI provides a user-friendly way to:
+
+- View all running MCP servers
+- Start and stop servers
+- Search the registry
+- Execute custom commands
+- Monitor server status
+
+### Running the Web GUI
+
+You can run the web GUI in two ways:
+
+#### Using Docker
+
+```bash
+# Build and run using docker-compose
+docker-compose up -d
+
+# The GUI will be available at http://localhost:8080
+```
+
+> **Important**: The Docker Compose configuration mounts the Docker socket (`/var/run/docker.sock`) into the container. This is required for the web GUI to manage MCP servers. Make sure your Docker socket has the correct permissions.
+
+#### Using the Binary
+
+```bash
+# Build the web GUI binary
+go build ./cmd/thv-web
+
+# Run the web GUI
+./thv-web
+
+# The GUI will be available at http://localhost:8080
+```
+
+The web GUI requires the `thv` binary to be in your PATH to execute commands. When running with Docker, this is handled automatically.
+
+### Environment Variables
+
+The web GUI can be configured using the following environment variables:
+
+- `PORT`: The port to run the web server on (default: 8080)
+- `TOOLHIVE_AUTH_TOKEN`: Optional authentication token for securing the API
 
 ## Contributing to ToolHive
 

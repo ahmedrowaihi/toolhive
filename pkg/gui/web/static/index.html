@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolHive Web Interface</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .command-output {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--code-background-color);
+      border-radius: var(--border-radius);
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+      border: 1px solid var(--border-color);
+    }
+
+    .command-output.error {
+      color: var(--del-color);
+    }
+
+    .command-output.success {
+      color: var(--ins-color);
+    }
+
+    dialog article {
+      max-width: 800px;
+    }
+
+    dialog form {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container-fluid">
+      <ul>
+        <li><strong>ToolHive</strong></li>
+      </ul>
+      <ul>
+        <li><button id="settingsBtn" class="outline">Settings</button></li>
+        <li><button id="newServerBtn">Custom Command</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <hgroup>
+        <h2>MCP Registry</h2>
+        <h3>Search and run MCPs from the registry</h3>
+      </hgroup>
+      <div class="search-container">
+        <input type="search" id="registrySearchInput" placeholder="Search MCPs...">
+        <button id="searchBtn">Search</button>
+      </div>
+      <div id="registryList" class="grid"></div>
+    </section>
+
+    <section>
+      <hgroup>
+        <h2>Running Servers</h2>
+        <h3>Manage your running MCP servers</h3>
+      </hgroup>
+      <div class="search-container">
+        <input type="search" id="searchInput" placeholder="Filter servers...">
+      </div>
+      <div id="serverList" class="grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>ToolHive Web Interface | <a href="https://github.com/ahmedrowaihi" target="_blank">@sudorw | ahmedrowaihi</a></small>
+    </div>
+  </footer>
+
+  <!-- Settings Modal -->
+  <dialog id="settingsModal">
+    <article>
+      <header>
+        <h3>Settings</h3>
+      </header>
+      <form id="settingsForm">
+        <fieldset>
+          <legend>Auto-refresh Settings</legend>
+          <label for="refreshInterval">
+            Refresh Interval (seconds)
+            <input type="number" id="refreshInterval" min="1" max="60" value="5">
+          </label>
+          <label for="toggleRefresh">
+            Auto-refresh Status
+            <button type="button" id="toggleRefresh" class="outline">Pause</button>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Authentication</legend>
+          <label for="authToken">
+            Auth Token
+            <input type="password" id="authToken" placeholder="Optional auth token">
+          </label>
+        </fieldset>
+
+        <footer>
+          <button type="submit">Save</button>
+          <button type="button" onclick="this.closest('dialog').close()">Cancel</button>
+        </footer>
+      </form>
+    </article>
+  </dialog>
+
+  <!-- Command Modal -->
+  <dialog id="newServerModal">
+    <article>
+      <header>
+        <h3>Run Custom Command</h3>
+      </header>
+      <form id="newServerForm">
+        <label for="serverName">
+          Command
+          <input type="text" id="serverName" required placeholder="Enter thv command to run...">
+        </label>
+        <footer>
+          <button type="submit">Run</button>
+          <button type="button" onclick="this.closest('dialog').close()">Cancel</button>
+        </footer>
+      </form>
+    </article>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

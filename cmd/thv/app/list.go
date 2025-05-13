@@ -71,7 +71,7 @@ func listCmdFunc(cmd *cobra.Command, _ []string) error {
 	// Output based on format
 	switch listFormat {
 	//nolint:goconst
-	case "json":
+	case FormatJSON:
 		return printJSONOutput(toolHiveContainers)
 	case "mcpservers":
 		return printMCPServersOutput(toolHiveContainers)

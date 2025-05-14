@@ -1,0 +1,213 @@
+/* No custom styles needed - using Pico CSS */
+
+/* Layout */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+/* Layout adjustments */
+main.container {
+  padding-top: 1rem;
+}
+
+main section {
+  margin-bottom: 2rem;
+}
+
+main section:last-child {
+  margin-bottom: 0;
+}
+
+/* Header Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.refresh-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.refresh-controls label {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.refresh-controls input[type="number"] {
+  width: 4rem;
+  margin: 0;
+}
+
+.controls input[type="password"] {
+  width: 200px;
+  margin: 0;
+}
+
+/* Global loader styles */
+.loader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loader-content {
+  background: var(--card-background-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+.loader-text {
+  margin: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Command Output */
+.command-output {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--card-background-color);
+  border-radius: var(--border-radius);
+  font-family: monospace;
+  white-space: pre-wrap;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+}
+
+.command-output.success {
+  border-left: 4px solid var(--ins-color);
+}
+
+.command-output.error {
+  border-left: 4px solid var(--del-color);
+}
+
+/* Modal Styles */
+dialog {
+  padding: 0;
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-box-shadow);
+}
+
+dialog article {
+  margin: 0;
+  padding: 1rem;
+}
+
+dialog header {
+  margin-bottom: 1rem;
+}
+
+dialog footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Settings Form */
+fieldset {
+  margin-bottom: 1rem;
+}
+
+fieldset legend {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* Search Container */
+.search-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Card Styles */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .search-container button {
+    width: 100%;
+  }
+}
+
+.server-card div {
+  flex: 1;
+}
+
+.server-card footer {
+  margin-top: auto;
+  padding-top: 1rem;
+}
